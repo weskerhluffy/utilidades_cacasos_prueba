@@ -7,35 +7,35 @@ rm -fv core*
 #mv -fv ya_echos/* .
 #rm -rfv ya_echos
 #mkdir ya_echos
-for caca in $(ls caca*txt)
+for prueba in $(ls in*txt)
 do
-	caca_truncada=""
+	prueba_truncada=""
 	return_codi=0
 
-	caca_truncada=${caca%.txt}
-	echo "la caca actual $caca"
-#	echo "la caca truncada $caca_truncada"
-	caca_log_c=$caca_truncada.c.log
-	caca_log_piton=$caca_truncada.shame.log
-#	echo "la caca en c $caca_log_c"
-#	echo "la caca ref $caca_log_piton"
+	prueba_truncada=${prueba%.*}
+	echo "la prueba actual $prueba"
+	echo "la prueba truncada $prueba_truncada"
+	prueba_log_c=$prueba_truncada.c.log
+	prueba_log_piton=$prueba_truncada.shame.log
+#	echo "la prueba en c $prueba_log_c"
+#	echo "la prueba ref $prueba_log_piton"
 #	date
-	./$1 < $caca > $caca_log_c
-	./$2 < $caca > $caca_log_piton
+	./$1 < $prueba > $prueba_log_c
+	./$2 < $prueba > $prueba_log_piton
 	return_codi=$?
 #	date
 	if [ $return_codi -ne 0 ] 
 	then
-		echo "verga, fallo en $caca"
+		echo "caramba, fallo en $prueba"
 		exit 1
 	fi
-	diferencia_ojala=$(diff $caca_log_c $caca_log_piton)
+	diferencia_ojala=$(diff $prueba_log_c $prueba_log_piton)
 #	echo "la diferencia es"
 	#echo "$diferencia_ojala CACA"
 	if [[ ! -z "$diferencia_ojala" && $return_codi -eq 0 ]]
 	then
-		echo "verga, diff en $caca"
+		echo "caramba, diff en $prueba"
 		exit 1
 	fi
-#	mv $caca ya_echos/
+#	mv $prueba ya_echos/
 done
