@@ -20,8 +20,8 @@ do
 #	echo "la prueba en c $prueba_log_c"
 #	echo "la prueba ref $prueba_log_piton"
 #	date
-	./$1 < $prueba > $prueba_log_c
-	./$2 < $prueba > $prueba_log_piton
+	$1 < $prueba > $prueba_log_c
+	$2 < $prueba > $prueba_log_piton
 	return_codi=$?
 #	date
 	if [ $return_codi -ne 0 ] 

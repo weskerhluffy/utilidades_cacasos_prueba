@@ -20,8 +20,8 @@ def gencoordinates(m, n, ords=True):
 if __name__ == "__main__":
     generados=0
     cacas=[]
-    g=gencoordinates(2147483134,2147483646,False)
-    while (generados<10):
+    g=gencoordinates(int(1E6)-int(1E5),int(1E6),False)
+    while (generados<1000):
         cacas.append(next(g))
         generados+=1
     for (x,y) in cacas:

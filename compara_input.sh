@@ -7,7 +7,7 @@ rm -fv core*
 #mv -fv ya_echos/* .
 #rm -rfv ya_echos
 #mkdir ya_echos
-for input in $(ls input*txt)
+for input in $(ls in*txt)
 do
 	input_truncada=""
 	return_codi=0
@@ -20,8 +20,12 @@ do
 	echo "la input en c $input_log_c"
 	echo "la input ref $input_log_piton"
 	date
-	./$1 < $input > $input_log_c
+	# XXX: https://serverfault.com/questions/151109/how-to-get-current-unix-time-in-milliseconds-in-bash
+	inicio=$(gdate +%s%N)
+	$1 < $input > $input_log_c
 	return_codi=$?
+	final=$(gdate +%s%N)
+	duracion=$(( final-inicio ))
 	date
 	if [ $return_codi -ne 0 ] 
 	then
@@ -36,5 +40,6 @@ do
 		echo "verga, diff en $input"
 		exit 1
 	fi
+	echo "la duracion de $input es $duracion"
 #	mv $input ya_echos/
 done
